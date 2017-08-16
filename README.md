@@ -18,6 +18,6 @@ Notice the Serial port can't be used to update the chip at the same time as send
 
 
 
-![Screenshot of the sonar UI](https://user-images.githubusercontent.com/602143/29384690-ec42c01e-82cc-11e7-9b6a-2b76f72cc2b0.png)  | ![Photo of the sonar and board](https://user-images.githubusercontent.com/602143/29384595-93528ca0-82cc-11e7-9212-7ba519a4c2e4.jpg)
+![Screenshot of the sonar UI](https://user-images.githubusercontent.com/602143/29387232-0c7651ca-82d7-11e7-81b0-6ea7e1f1f18b.png)  | ![Photo of the sonar and board](https://user-images.githubusercontent.com/602143/29384595-93528ca0-82cc-11e7-9212-7ba519a4c2e4.jpg)
 :-------------------------:|:-------------------------:
 UI             |  Setup photo

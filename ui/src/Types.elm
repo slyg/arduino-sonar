@@ -25,6 +25,7 @@ type alias PolarCoord =
 
 type alias Model =
     { coords : Dict Angle CartesianCoord
+    , currentAngle : Angle
     }
 
 

@@ -5,14 +5,14 @@ import Html.Attributes exposing (style)
 import Types exposing (..)
 import Dict exposing (Dict)
 import List
-import Svg exposing (svg, circle)
-import Svg.Attributes exposing (cx, cy, r, width, height, fill, viewBox)
+import Svg exposing (svg, line, circle)
+import Svg.Attributes exposing (x1, x2, y1, y2, cx, cy, r, stroke, strokeWidth, width, height, fill, viewBox)
 import WebSocket exposing (listen)
 import Json.Decode as Decode exposing (Decoder, field, float, decodeString)
 
 
 init =
-    ( Model Dict.empty, Cmd.none )
+    ( Model Dict.empty 0, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -35,7 +35,11 @@ update msg model =
                 point =
                     polarToCartesianCoord polarCoord
             in
-                { model | coords = Dict.insert angle point model.coords } ! []
+                { model
+                    | coords = Dict.insert angle point model.coords
+                    , currentAngle = angle
+                }
+                    ! []
 
 
 polarCoordRecordDecoder : Decoder PolarCoordRecord
@@ -53,12 +57,12 @@ polarToCartesianCoord ( angle, distance ) =
 
         x =
             distance
-                |> (*) (cos (degrees angle))
+                |> (*) (cos <| degrees angle)
                 |> zoom
 
         y =
             distance
-                |> (*) (sin (degrees (angle + 180)))
+                |> (*) (sin << (+) pi <| degrees angle)
                 |> zoom
     in
         ( x, y )
@@ -97,7 +101,7 @@ view model =
                 [ cx "250"
                 , cy "250"
                 , r "10"
-                , fill "#ffffff"
+                , fill "#dd9922"
                 ]
                 []
 
@@ -105,6 +109,17 @@ view model =
             model.coords
                 |> Dict.values
                 |> List.map viewCoord
+
+        angleView =
+            line
+                [ x2 "250"
+                , y2 "250"
+                , x1 (toString (250 + 250 * (cos (degrees model.currentAngle))))
+                , y1 (toString (250 - 250 * (sin (degrees model.currentAngle))))
+                , stroke "#dd9922"
+                , strokeWidth "3"
+                ]
+                []
     in
         div
             [ style
@@ -114,7 +129,7 @@ view model =
                 ]
             ]
             [ svg [ width "500", height "250", viewBox "0 0 500 250" ]
-                (layout :: origin :: circles)
+                ([ layout, angleView, origin ] ++ circles)
             ]
 
 
