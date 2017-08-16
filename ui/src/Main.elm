@@ -35,7 +35,7 @@ update msg model =
                 point =
                     polarToCartesianCoord polarCoord
             in
-                { model | points = Dict.insert angle point model.points } ! []
+                { model | coords = Dict.insert angle point model.coords } ! []
 
 
 polarCoordRecordDecoder : Decoder PolarCoordRecord
@@ -102,7 +102,7 @@ view model =
                 []
 
         circles =
-            model.points
+            model.coords
                 |> Dict.values
                 |> List.map viewCoord
     in
