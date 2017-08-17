@@ -12,15 +12,12 @@ import Json.Decode as Decode exposing (Decoder, field, float, decodeString)
 
 
 init =
-    ( Model Dict.empty 0, Cmd.none )
+    (Model Dict.empty 0) ! []
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Noop ->
-            model ! []
-
         Frame msg ->
             let
                 polarCoord =

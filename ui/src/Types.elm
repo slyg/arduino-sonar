@@ -30,5 +30,4 @@ type alias Model =
 
 
 type Msg
-    = Noop
-    | Frame String
+    = Frame String
