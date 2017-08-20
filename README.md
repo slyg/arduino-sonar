@@ -9,6 +9,8 @@
 ## Setup
 
 1. Upload the sketch (`sketch.ino`) on the arduino board
+    - `sonar.ino` using ultrasonic sensor
+    - `radar.ino` if you want to test with an [IR sharp sensor](http://www.sharp-world.com/products/device/lineup/data/pdf/datasheet/gp2y0a21yk_e.pdf)
 2. Start the node process `node index.js` in `./socketserver` (you may have to change the serial port before though)
 3. Start the ui using `elm reactor` in `./ui`
 
